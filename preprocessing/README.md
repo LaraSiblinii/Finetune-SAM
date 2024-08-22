@@ -40,7 +40,7 @@ transform for labels.
 ```python
 ScaleIntensityRanged(
     keys=['image'],
-    a_min=-150,            # min intesisty for IRCAD
+    a_min=-150,        # min intesisty for IRCAD
     a_max=250,         # max intensity for IRCAD
     b_min=0.0,
     b_max=255.0,

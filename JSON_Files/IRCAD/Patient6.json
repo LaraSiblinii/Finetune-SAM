@@ -1,0 +1,516 @@
+{
+    "training": [
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_1.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_1.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_2.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_2.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_3.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_3.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_4.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_4.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_5.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_5.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_6.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_6.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_7.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_7.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_8.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_8.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_9.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_9.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_10.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_10.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_11.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_11.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_12.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_12.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_13.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_13.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_14.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_14.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_15.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_15.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_16.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_16.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_17.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_17.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_18.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_18.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_6.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_6.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_20.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_20.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_21.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_21.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_22.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_22.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_23.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_23.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_24.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_24.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_25.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_25.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_26.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_26.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_27.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_27.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_28.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_28.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_29.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_29.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_30.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_30.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_31.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_31.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_32.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_32.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_33.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_33.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_34.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_34.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_35.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_35.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_36.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_36.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_37.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_37.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_38.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_38.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_39.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_39.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_40.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_40.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_41.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_41.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_42.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_42.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_43.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_43.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_44.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_44.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_45.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_45.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_46.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_46.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_47.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_47.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_48.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_48.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_49.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_49.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_50.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_50.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_51.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_51.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_52.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_52.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_53.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_53.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_54.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_54.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_55.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_55.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_56.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_56.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_57.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_57.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_58.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_58.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_59.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_59.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_60.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_60.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_61.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_61.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_62.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_62.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_63.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_63.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_64.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_64.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_65.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_65.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_66.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_66.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_67.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_67.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_68.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_68.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_69.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_69.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_70.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_70.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_71.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_71.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_72.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_72.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_73.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_73.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_74.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_74.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_75.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_75.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_76.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_76.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_77.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_77.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_78.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_78.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_79.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_79.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_80.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_80.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_81.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_81.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_82.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_82.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_83.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_83.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_84.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_84.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_85.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_85.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_86.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_86.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_87.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_87.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_88.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_88.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_89.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_89.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_90.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_90.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_91.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_91.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_92.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_92.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_93.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_93.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_94.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_94.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_95.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_95.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_96.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_96.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_97.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_97.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_98.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_98.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_99.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_99.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_100.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_100.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_101.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_101.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_102.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_102.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_103.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_103.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_104.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_104.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_105.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_105.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_106.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_106.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_107.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_107.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_108.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_108.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_109.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_109.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_110.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_110.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_111.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_111.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_112.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_112.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_113.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_113.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_114.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_114.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_115.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_115.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_116.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_116.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_117.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_117.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_118.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_118.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_119.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_119.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_120.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_120.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_121.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_121.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_122.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_122.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_123.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_123.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_124.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_124.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_125.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_125.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_126.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_126.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_127.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_127.nii.gz"
+        },
+        {
+            "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 6/06-VE_128.nii.gz",
+            "label": "/home3/lsiblini/data/IRCAD/database_labels_nii/Patient 6/06-VE-por_128.nii.gz"
+        }
+    ]
+}

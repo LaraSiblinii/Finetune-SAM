@@ -1,5 +1,5 @@
 **Overview**
-The *'dataset.py'* file provides a template for setting up a dataset in your project. It includes transformations and preprocessing steps
+/nThe *'dataset.py'* file provides a template for setting up a dataset in your project. It includes transformations and preprocessing steps
 tailored to your data. This README explains how to customize the *'dataset.py'* file for different datasets, with a particular focus on the
 *'ScaleIntensityRanged'* transform and handling of *'prompts'*.
 

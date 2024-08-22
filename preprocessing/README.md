@@ -2,7 +2,7 @@
 
 The *'dataset.py'* file provides a template for setting up a dataset in your project. It includes transformations and preprocessing steps
 tailored to your data. This README explains how to customize the *'dataset.py'* file for different datasets, with a particular focus on the
-*'ScaleIntensityRanged'* transform and handling of *'prompts'*.
+*'ScaleIntensityRanged'* transform.
 
 **Note:** The SAMDataset function is defined in *'main.py'*. This README focuses on explaining how to modify *'dataset.py'* but does not 
 require running this file directly during training.
@@ -17,9 +17,23 @@ data is consistent and suitable for model training. Here’s how to configure it
 **For Images:**
 
 -'a_min': This parameter should be set to the minimum intensity value present in your dataset images.
+
 -'a_max': This parameter should be set to the maximum intensity value present in your dataset images.
+
 -'b_min': The minimum value to scale to. Typically set to 0.0 for standardization.
+
 -'b_max': The maximum value to scale to. Typically set to 255.0 for scaling intensity values to the range [0, 255].
+
+**For Labels:**
+
+-'a_min': This parameter should be set to the minimum intensity value present in your labels.
+-'a_max': This parameter should be set to the maximum intensity value present in your labels.
+-'b_min': The minimum value to scale to, usually 0.0.
+-'b_max': The maximum value to scale to, often 1.0.
+
+**Important Note:** If your labels are already binarized (i.e., they only contain values 0 and 1), you should skip the ScaleIntensityRanged 
+transform for labels.
+
 
 **Example Configuration:**
 
@@ -41,14 +55,3 @@ ScaleIntensityRanged(
     b_max=255.0,
     clip=True
 )
- **Continue with normal text**
-
-##**For Labels:**
-
--'a_min': This parameter should be set to the minimum intensity value present in your labels.
--'a_max': This parameter should be set to the maximum intensity value present in your labels.
--'b_min': The minimum value to scale to, usually 0.0.
--'b_max': The maximum value to scale to, often 1.0.
-
-**Important Note:** If your labels are already binarized (i.e., they only contain values 0 and 1), you should skip the ScaleIntensityRanged 
-transform for labels.

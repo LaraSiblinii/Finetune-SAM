@@ -91,6 +91,9 @@ def get_bounding_box(ground_truth_map):
     '''
     This function creates varying bounding box coordinates based on the segmentation contours as prompt for the SAM model
     The padding is random int values between 5 and 20 pixels
+
+    Returns:
+    List of Bounding Box Coordinates: [xmin, ymin, xmax, ymax]
     '''
 
     if len(np.unique(ground_truth_map)) > 1:
@@ -115,7 +118,19 @@ def get_bounding_box(ground_truth_map):
         return [0, 0, 256, 256] 
        
 def get_region_centroids(binary_mask):
-
+    """
+    This function identifies distinct regions within a binary mask, places points all over each region,
+    and then replaces those points with the midpoint of each region.
+    
+    Parameters:
+    binary_mask (numpy.ndarray): 2D array where 1 represents the regions and 0 represents the background.
+    
+    Returns:
+    all_points: List of lists containing the coordinates of points for each region.
+    midpoints: List of midpoints for each region with float coordinates.
+    labels: List of labels (1 or 0) indicating the presence of regions.
+    """
+    
     labeled_mask, num_features = label(binary_mask) #array([0, 1, 2, 3, 4, 5, 6, 7], dtype=int32), 7
     
     regions = find_objects(labeled_mask)
@@ -149,6 +164,19 @@ def get_region_centroids(binary_mask):
     return all_points, midpoints, labels
 
 def get_region_centroids_boxes_points(binary_mask):
+    """
+    This function identifies distinct regions within a binary mask and calculates their centroids,
+    the two top-left, and the two top-right points.
+    
+    Parameters:
+    binary_mask (numpy.ndarray): 2D array where 1 represents the regions and 0 represents the background.
+    size_threshold: area of the region.
+    
+    Returns:
+    all_points: List of lists containing the coordinates points for each region.
+    midpoints: List of coordinates for the computed midpoints (or centroids) and bounding box corners (top-left and top-right points). The coordinates are based on whether the region is large or small.
+    labels: List of labels (1 or 0) indicating the presence of regions.
+    """
 
     labeled_mask, num_features = label(binary_mask)
     regions = find_objects(labeled_mask)
@@ -233,7 +261,20 @@ def get_region_centroids_boxes_points(binary_mask):
     return all_points, midpoints, labels
 
 def get_region_severalpositive_negative_points(binary_mask):
-
+    """
+    This function identifies distinct regions within a binary mask, calculates their centroids,
+    the two top-left, and the two top-right points, and places points outside the regions but between the regions (background points).
+    
+    Parameters:
+    binary_mask (numpy.ndarray): 2D array where 1 represents the regions and -1 represents the background.
+    size_threshold: area of the region.
+    
+    Returns:
+    all_points: List of lists containing the coordinates points for each region.
+    midpoints: A list of coordinates for the computed midpoints (or centroids) of regions, bounding box corners, and background points.
+    labels: List of labels (1 or -1) corresponding to each entry in midpoints. The label 1 is assigned to points derived from actual regions, while -1 is background points.
+    """
+    
     labeled_mask, num_features = label(binary_mask)
     regions = find_objects(labeled_mask)
 

@@ -35,8 +35,8 @@ class SAMDataset(Dataset):
             ScaleIntensityRanged(keys=['image'], a_min=-150, a_max=250,
                          b_min=0.0, b_max=255.0, clip=True),
 
-            #ScaleIntensityRanged(keys=['label'], a_min=0, a_max=255,
-             #            b_min=0.0, b_max=1.0, clip=True),
+            ScaleIntensityRanged(keys=['label'], a_min=0, a_max=255,
+                         b_min=0.0, b_max=1.0, clip=True),
 
             SpatialPadd(keys=["image", "label"], spatial_size=(256,256))
             
@@ -51,10 +51,10 @@ class SAMDataset(Dataset):
         mask_path = data_dict['label']
 
         # create a dict of images and labels to apply Monai's dictionary transforms
-        data_dict = self.transforms({'image': image_path, 'label': mask_path}) #dictionary for a single image; values are paths
+        data_dict = self.transforms({'image': image_path, 'label': mask_path}) 
 
         # squeeze extra dimensions and convert to int type for huggingface's models expected inputs
-        image = data_dict['image'].squeeze().astype(np.uint8) ##numpy array: (256,256)
+        image = data_dict['image'].squeeze().astype(np.uint8) #numpy array: (256,256)
         ground_truth_mask = data_dict['label'].squeeze() #metatensor torch.size[(256, 256)]
 
         # convert the grayscale array to RGB (3 channels)
@@ -62,8 +62,6 @@ class SAMDataset(Dataset):
 
         # convert to PIL image to match the expected input of processor
         image_rgb = Image.fromarray(array_rgb) #PIL.Image.Image
-
-        # get bounding box prompt (returns xmin, ymin, xmax, ymax)
 
         prompt1 = get_bounding_box(ground_truth_mask)#list (123,124,148,152)
         
@@ -78,5 +76,5 @@ class SAMDataset(Dataset):
         # add ground truth segmentation (ground truth image size is 256x256)
         inputs["ground_truth_mask"] = torch.from_numpy(ground_truth_mask.astype(np.int8))#add to inputs dictionary a new key 'ground truth'
 
-        return inputs #Dictionary Containing the keys and values for each item, but a list of dictionaries for all data in tr 1280
+        return inputs #Dictionary Containing the keys and values for each item
 

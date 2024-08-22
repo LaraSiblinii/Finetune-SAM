@@ -41,6 +41,7 @@ ScaleIntensityRanged(
     b_max=255.0,
     clip=True
 )
+**
 
 **For Labels:**
 

@@ -41,9 +41,9 @@ ScaleIntensityRanged(
     b_max=255.0,
     clip=True
 )
-**
+ **Continue with normal text**
 
-**For Labels:**
+##**For Labels:**
 
 -'a_min': This parameter should be set to the minimum intensity value present in your labels.
 -'a_max': This parameter should be set to the maximum intensity value present in your labels.

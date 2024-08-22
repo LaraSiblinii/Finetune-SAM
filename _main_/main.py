@@ -128,19 +128,6 @@ def get_bounding_box(ground_truth_map):
         return [0, 0, 256, 256] 
        
 def get_region_centroids(binary_mask):
-    """
-    This function identifies distinct regions within a binary mask, places points all over each region,
-    and then replaces those points with the midpoint of each region.
-    
-    Parameters:
-    binary_mask (numpy.ndarray): 2D array where 1 represents the regions and 0 represents the background.
-    
-    Returns:
-    list of lists: List of lists containing points for each region.
-    list of tuples: List of midpoints for each region with float coordinates.
-    list of int: List of labels (1 or 0) indicating the presence of regions.
-    numpy.ndarray: New binary mask with midpoints.
-    """
 
     labeled_mask, num_features = label(binary_mask) #array([0, 1, 2, 3, 4, 5, 6, 7], dtype=int32), 7
     
@@ -175,20 +162,6 @@ def get_region_centroids(binary_mask):
     return all_points, midpoints, labels
 
 def get_region_centroids_boxes_points(binary_mask):
-    """
-    This function identifies distinct regions within a binary mask and calculates their centroids,
-    the two top-left, and the two top-right points.
-    
-    Parameters:
-    binary_mask (numpy.ndarray): 2D array where 1 represents the regions and 0 represents the background.
-    
-    Returns:
-    list of lists: List of lists containing points for each region.
-    list of tuples: List of midpoints for each region with float coordinates.
-    list of tuples: List of top-left points for each region.
-    list of tuples: List of top-right points for each region.
-    numpy.ndarray: New binary mask with midpoints, top-left, and top-right points.
-    """
 
     labeled_mask, num_features = label(binary_mask)
     regions = find_objects(labeled_mask)
@@ -273,19 +246,6 @@ def get_region_centroids_boxes_points(binary_mask):
     return all_points, midpoints, labels
 
 def get_region_severalpositive_negative_points(binary_mask):
-    """
-    This function identifies distinct regions within a binary mask, calculates their centroids,
-    and places points outside the regions but between the regions.
-    
-    Parameters:
-    binary_mask (numpy.ndarray): 2D array where 1 represents the regions and 0 represents the background.
-    
-    Returns:
-    list of lists: List of lists containing points for each region.
-    list of tuples: List of midpoints for each region with float coordinates.
-    list of int: List of labels (1 or 0) indicating the presence of regions.
-    numpy.ndarray: New binary mask with midpoints and boundary points.
-    """
 
     labeled_mask, num_features = label(binary_mask)
     regions = find_objects(labeled_mask)
@@ -412,18 +372,6 @@ def pad_collate_fn(batch):
     ground_truth_mask = torch.stack([item['ground_truth_mask'] for item in batch])
     
     input_points = [item['input_points'] for item in batch]
-    
-    """  
-    Shape of input_points[0]: torch.Size([1, 7, 2])
-    Shape of input_points[1]: torch.Size([1, 7, 2])
-    Shape of input_points[2]: torch.Size([1, 7, 2])
-    Shape of input_points[3]: torch.Size([1, 9, 2])
-    Shape of input_points[4]: torch.Size([1, 12, 2])
-    Shape of input_points[5]: torch.Size([1, 9, 2])
-    Shape of input_points[6]: torch.Size([1, 17, 2])
-    Shape of input_points[7]: torch.Size([1, 1, 2])
-    Shape of input_points[8]: torch.Size([1, 11, 2])
-    Shape of input_points[9]: torch.Size([1, 11, 2]) """
 
     input_labels = [item['input_labels'] for item in batch]
     
@@ -432,28 +380,6 @@ def pad_collate_fn(batch):
     
     padded_input_points = padded_input_points.unsqueeze(1)
     padded_input_labels = padded_input_labels.unsqueeze(1)
-
-    """
-    Batch Item 0: Padded Input Points Size: torch.Size([1, 12, 2])
-    Batch Item 0: Padded Input Labels Size: torch.Size([1, 12])
-    Batch Item 1: Padded Input Points Size: torch.Size([1, 12, 2])
-    Batch Item 1: Padded Input Labels Size: torch.Size([1, 12])
-    Batch Item 2: Padded Input Points Size: torch.Size([1, 12, 2])
-    Batch Item 2: Padded Input Labels Size: torch.Size([1, 12])
-    Batch Item 3: Padded Input Points Size: torch.Size([1, 12, 2])
-    Batch Item 3: Padded Input Labels Size: torch.Size([1, 12])
-    Batch Item 4: Padded Input Points Size: torch.Size([1, 12, 2])
-    Batch Item 4: Padded Input Labels Size: torch.Size([1, 12])
-    Batch Item 5: Padded Input Points Size: torch.Size([1, 12, 2])
-    Batch Item 5: Padded Input Labels Size: torch.Size([1, 12])
-    Batch Item 6: Padded Input Points Size: torch.Size([1, 12, 2])
-    Batch Item 6: Padded Input Labels Size: torch.Size([1, 12])
-    Batch Item 7: Padded Input Points Size: torch.Size([1, 12, 2])
-    Batch Item 7: Padded Input Labels Size: torch.Size([1, 12])
-    Batch Item 8: Padded Input Points Size: torch.Size([1, 12, 2])
-    Batch Item 8: Padded Input Labels Size: torch.Size([1, 12])
-    Batch Item 9: Padded Input Points Size: torch.Size([1, 12, 2])
-    Batch Item 9: Padded Input Labels Size: torch.Size([1, 12]) """
     
     return {
         'pixel_values': pixel_values,

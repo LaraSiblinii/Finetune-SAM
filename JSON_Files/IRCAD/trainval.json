@@ -1,3 +1,4 @@
+%fold=0 for training set and fold=1 for validation set
 {
     "training": [
         {

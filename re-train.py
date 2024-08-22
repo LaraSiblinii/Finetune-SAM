@@ -1,3 +1,9 @@
+''' 
+if you want to resume training from a saved checkpoint, you can use this file. 
+For example, if you have already trained the model for 100 epochs and wish to 
+continue from that point, this file will allow you to do so.
+'''
+
 import sys
 from pathlib import Path
 parent_dir = Path(__file__).resolve().parent.parent

@@ -29,25 +29,12 @@ from loss_functions.loss_functions import seg_loss
 
 from monai.transforms import (
     EnsureChannelFirstd,
-    EnsureTyped,
     Compose,
-    CropForegroundd,
-    CopyItemsd,
     LoadImaged,
-    CenterSpatialCropd,
-    Invertd,
-    OneOf,
     Orientationd,
-    MapTransform,
-    NormalizeIntensityd,
-    RandSpatialCropSamplesd,
-    CenterSpatialCropd,
-    RandSpatialCropd,
     SpatialPadd,
     ScaleIntensityRanged,
     Spacingd,
-    RepeatChanneld,
-    ToTensord,
 )
 
 "Setup average meter, fold reader, checkpoint saver"

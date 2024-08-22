@@ -1,4 +1,4 @@
-**Overview**
+#**Overview**
 The *'dataset.py'* file provides a template for setting up a dataset in your project. It includes transformations and preprocessing steps
 tailored to your data. This README explains how to customize the *'dataset.py'* file for different datasets, with a particular focus on the
 *'ScaleIntensityRanged'* transform and handling of *'prompts'*.
@@ -6,16 +6,19 @@ tailored to your data. This README explains how to customize the *'dataset.py'* 
 **Note:** The SAMDataset function is defined in *'main.py'*. This README focuses on explaining how to modify *'dataset.py'* but does not 
 require running this file directly during training.
 
-**Key Transformations:**
-**1. 'ScaleIntensityRanged'**
+##**Key Transformations:**
+###**1. 'ScaleIntensityRanged'**
 The *'ScaleIntensityRanged'* transform is used to scale the intensity values of your images and labels. This normalization ensures that the input
 data is consistent and suitable for model training. Here’s how to configure it based on your dataset:
-**For Images:**
-'a_min': This parameter should be set to the minimum intensity value present in your dataset images.
-'a_max': This parameter should be set to the maximum intensity value present in your dataset images.
-'b_min': The minimum value to scale to. Typically set to 0.0 for standardization.
-'b_max': The maximum value to scale to. Typically set to 255.0 for scaling intensity values to the range [0, 255].
+####**For Images:**
+
+-'a_min': This parameter should be set to the minimum intensity value present in your dataset images.
+-'a_max': This parameter should be set to the maximum intensity value present in your dataset images.
+-'b_min': The minimum value to scale to. Typically set to 0.0 for standardization.
+-'b_max': The maximum value to scale to. Typically set to 255.0 for scaling intensity values to the range [0, 255].
+
 **Example Cnfiguration:**
+
 ScaleIntensityRanged(
     keys=['image'],
     a_min=-150,            # min intesisty for IRCAD

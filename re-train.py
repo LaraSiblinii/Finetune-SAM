@@ -7,8 +7,9 @@ continue from that point, this file will allow you to do so.
 import sys
 from pathlib import Path
 import matplotlib.pyplot as plt
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '_main_')))
-import main
+parent_dir = Path(__file__).resolve().parent.parent
+sys.path.append(str(parent_dir))
+from _main_.main import *
 
 if __name__ == "__main__":
 

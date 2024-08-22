@@ -12,6 +12,8 @@
         "0": "training set"
         "1": "validation set"
     }
+    "numTraining": 18,
+    "numvalidating": 2,
     "training": [
         {
             "image": [

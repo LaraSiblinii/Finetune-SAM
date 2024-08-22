@@ -8,6 +8,10 @@
         "0": "background",
         "1": "lesion"
     },
+    "folds": {
+        "0": training set
+        "1": validation set
+    }
     "training": [
         {
             "image": [

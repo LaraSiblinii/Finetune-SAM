@@ -1,4 +1,13 @@
 {
+    "modality": {
+        "0": "T2W",
+        "1": "ADC",
+        "2": "HBV"
+    },
+    "labels": {
+        "0": "background",
+        "1": "lesion"
+    },
     "training": [
         {
             "image": [

@@ -1,4 +1,14 @@
 {
+    "labels": {
+        "0": "background",
+        "1": "portal veins"
+    },
+    "folds": {
+        "0": "training set"
+        "1": "validation set"
+    }
+    "numTraining": 16,
+    "numvalidating": 2,
     "training": [
         {
             "image": "/home3/lsiblini/data/IRCAD/database_images_nii/Patient 1/01-VE_1.nii.gz",

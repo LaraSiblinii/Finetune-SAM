@@ -23,6 +23,7 @@ data is consistent and suitable for model training. Here’s how to configure it
 
 **Example Configuration:**
 
+```python
 ScaleIntensityRanged(
     keys=['image'],
     a_min=-150,            # min intesisty for IRCAD

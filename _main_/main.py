@@ -476,15 +476,13 @@ class SAMDataset(Dataset):
 
             Orientationd(keys=['image', 'label'], axcodes='RA'),
 
-            # resample all training images to a fixed spacing
             Spacingd(keys=['image', 'label'], pixdim=(1.5, 1.5), mode=("bilinear", "nearest")),
 
-            # scale intensities to 0 and 255 to match the expected input intensity range
             ScaleIntensityRanged(keys=['image'], a_min=-150, a_max=250,
                          b_min=0.0, b_max=255.0, clip=True),
 
-            #ScaleIntensityRanged(keys=['label'], a_min=0, a_max=255,
-             #            b_min=0.0, b_max=1.0, clip=True),
+            ScaleIntensityRanged(keys=['label'], a_min=0, a_max=255,
+                         b_min=0.0, b_max=1.0, clip=True),
 
             SpatialPadd(keys=["image", "label"], spatial_size=(256,256))
             
@@ -499,19 +497,17 @@ class SAMDataset(Dataset):
         mask_path = data_dict['label']
 
         # create a dict of images and labels to apply Monai's dictionary transforms
-        data_dict = self.transforms({'image': image_path, 'label': mask_path}) #dictionary for a single image; values are paths
+        data_dict = self.transforms({'image': image_path, 'label': mask_path}) 
 
         # squeeze extra dimensions and convert to int type for huggingface's models expected inputs
-        image = data_dict['image'].squeeze().astype(np.uint8) ##numpy array: (256,256)
-        ground_truth_mask = data_dict['label'].squeeze() #metatensor torch.size[(256, 256)]
+        image = data_dict['image'].squeeze().astype(np.uint8)
+        ground_truth_mask = data_dict['label'].squeeze() 
 
         # convert the grayscale array to RGB (3 channels)
         array_rgb = np.dstack((image, image, image)) # numpy_array (256,256,3)
 
         # convert to PIL image to match the expected input of processor
         image_rgb = Image.fromarray(array_rgb) #PIL.Image.Image
-
-        # get bounding box prompt (returns xmin, ymin, xmax, ymax)
 
         prompt1 = get_bounding_box(ground_truth_mask)#list (123,124,148,152)
         
@@ -524,9 +520,9 @@ class SAMDataset(Dataset):
         inputs = {k: v.squeeze(0) for k, v in inputs.items()}
 
         # add ground truth segmentation (ground truth image size is 256x256)
-        inputs["ground_truth_mask"] = torch.from_numpy(ground_truth_mask.astype(np.int8))#add to inputs dictionary a new key 'ground truth'
+        inputs["ground_truth_mask"] = torch.from_numpy(ground_truth_mask.astype(np.int8))
 
-        return inputs #Dictionary Containing the keys and values for each item, but a list of dictionaries for all data in tr 1280
+        return inputs 
 
 def train_epoch(model, train_dataloader, optimizer, epoch, max_epochs, loss, train_output_path):
         model.train()

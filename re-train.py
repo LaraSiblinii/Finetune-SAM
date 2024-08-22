@@ -130,7 +130,7 @@ if __name__ == "__main__":
             param.requires_grad_(False)
 
     max_epochs = 200
-    start_epoch= checkpoint['epoch']
+    start_epoch= checkpoint['epoch'] #or directly specify the number of epoch were you wish to start to avoid repeated epochs 
 
     #Excute training
 

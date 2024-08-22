@@ -2,14 +2,14 @@ import sys
 from pathlib import Path
 parent_dir = Path(__file__).resolve().parent.parent
 sys.path.append(str(parent_dir))
-from _main_.main_veela import *
 import matplotlib.pyplot as plt
+from _main_.main import *
 
 if __name__ == "__main__":
 
     config = SamConfig.from_pretrained("facebook/sam-vit-base")
     model = SamModel(config)
-    checkpoint_path = "/home3/lsiblini/output/Results_SAM_noMasks/VEELA/train_100/model_100.pt"
+    checkpoint_path = "/home3/lsiblini/output/Results_SAM_noMasks/VEELA/train_100/model_100.pt" #include the path to the checkpoints
     checkpoint=torch.load(checkpoint_path)
     model.load_state_dict(checkpoint["state_dict"])
     optimizer.load_state_dict(checkpoint['optimizer_state_dict'])    
@@ -100,21 +100,21 @@ if __name__ == "__main__":
         )
     
     
-    root_dir= "/home3/lsiblini/output/Results_SAM_noMasks/VEELA/train_200/"#to save the checkpoints
+    root_dir= "/home3/lsiblini/output/Results_SAM_noMasks/VEELA/train_200/" #new path to save tnew model checkpoints
     filename="model_200.pt"
-    data_dir = "/home3/lsiblini/data/VEELA_2D_trainval"
+    data_dir = "/home3/lsiblini/data/IRCAD"
     images_dir = os.path.join(data_dir, "images")
     labels_dir = os.path.join(data_dir, "portal_labels")
-    json_list = "/home3/lsiblini/data/VEELA_2D_trainval/veela_trainval.json"
-    train_output_path= "/home3/lsiblini/output/Results_SAM_noMasks/VEELA/train_200/train-epoch-200"
-    val_output_path= "/home3/lsiblini/output/Results_SAM_noMasks/VEELA/train_200/val-epoch-200"     
+    json_list = "/home3/lsiblini/data/IRCAD/trainval.json"
+    train_output_path= "/home3/lsiblini/output/train_200/train-epoch-200"
+    val_output_path= "/home3/lsiblini/output/train_200/val-epoch-200"     
     
     tr, val = datafold_read(json_list, data_dir, key="training")
 
-    train_dataset= SAMDataset_VEELA(data_list= tr, processor=processor)
+    train_dataset= SAMDataset(data_list= tr, processor=processor)
     train_dataloader = DataLoader(train_dataset, batch_size=10, collate_fn=pad_collate_fn, shuffle=True)
 
-    val_dataset = SAMDataset_VEELA(data_list=val, processor=processor)
+    val_dataset = SAMDataset(data_list=val, processor=processor)
     val_dataloader = DataLoader(val_dataset, batch_size=1, collate_fn=pad_collate_fn, shuffle=True)
 
     # Freeze the encoder weights for finetuning (only update gradients for mask decoder)
@@ -124,7 +124,7 @@ if __name__ == "__main__":
             param.requires_grad_(False)
 
     max_epochs = 200
-    start_epoch= 100 #checkpoint['epoch']
+    start_epoch= checkpoint['epoch']
 
     #Excute training
 
@@ -160,4 +160,4 @@ if __name__ == "__main__":
 
     plt.tight_layout()
 
-    plt.savefig("/home3/lsiblini/output/Results_SAM_noMasks/VEELA/train_200/curves_plot_200.png")
+    plt.savefig("/home3/lsiblini/output/train_200/curves_plot_200.png")

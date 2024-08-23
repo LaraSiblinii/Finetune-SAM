@@ -73,6 +73,11 @@ pip install -q git+https://github.com/huggingface/transformers.git
 pip install -r requirements.txt
 ```
 
-- Step 2: Dowload the SAM weights from [SAM repository](https://github.com/facebookresearch/segment-anything#model-checkpoints)
+- Step 2: Download the SAM weights from [SAM repository](https://github.com/facebookresearch/segment-anything#model-checkpoints)
 
-- Step 3: 
+- Step 3: Modify the prompting function, select the prompts you wish to use, and adjust the preprocessing steps for ''SAMDataset' in the 'main.py' file.
+
+- Step 4: To execute the training, run the 'train.py' file. If you wish to resume training from a specific epoch, run the 're-train.py' file instead.
+  Before doing so, make sure to modify the paths to match your setup.
+  
+- Step 5: To perform testing, run the 'inference.py' file. Be sure to update the paths to match your setup before executing it.

@@ -8,7 +8,7 @@ Our study explores prompt-guided strategies in SAM for medical image segmentatio
 
 **Repository Structure**
 
-**1. 'main.py' indie '_ main _' folder**
+**1. 'main.py' located indide '_ main _' folder**
 
  **Purpose:**
 
@@ -29,7 +29,7 @@ This is the main script where the SAM model is defined and the training process 
 ``` 
 **Note:** 'input_points' and 'input_labels' prompts should be used together 
 
-**2. 'dataset.py' inside 'preprocessing' folder:** 
+**2. 'dataset.py' located inside 'preprocessing' folder:** 
 
  **Purpose:**
 
@@ -48,4 +48,14 @@ You don't need to run the 'dataset.py' file directly; the 'SAMDataset' function 
 
 **Note:** For detailed guidance on setting up your own dataset and configuring the prompts functions, please refer to the **'README.md'** file located in the **'preprocessing'** folder.
 
+**3. 'requirements.py':** 
 
+ **Purpose:**
+
+Lists all the Python dependencies required to run this project.
+
+Ensure you install all the required packages using the following command:
+
+```python
+pip install -r requirements.txt
+```

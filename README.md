@@ -8,7 +8,7 @@ Our study explores prompt-guided strategies in SAM for medical image segmentatio
 
 **Repository Structure**
 
-**1. 'main.py' located indide '_ main _' folder**
+**1. 'main.py' located indide '_ main _' folder:**
 
  **Purpose:**
 
@@ -59,3 +59,18 @@ Ensure you install all the required packages using the following command:
 ```python
 pip install -r requirements.txt
 ```
+
+
+**Quick Start:**
+
+**Install**
+
+- Step 1:
+
+```python
+pip install -q monai
+pip install -q git+https://github.com/huggingface/transformers.git
+pip install -r requirements.txt
+```
+
+- Step 2: Dowload the SAM weights

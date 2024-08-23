@@ -104,9 +104,11 @@ pip install -r requirements.txt
 <h2><u>Citation</u></h2>
 Please cite our paper if you use our code or reference our work:
 
+```python
 @inproceedings{Siblini2024SAM,
   title={Optimal Prompting in SAM for Few-Shot and Weakly Supervised Medical Image Segmentation},
   author={Siblini, Lara and Andrade-Miranda, Gustavo and Taguelmimt, Kamilia and Visvkis, Dimitris and Bert, Julien},
   booktitle={MICCAI 2024 2nd International Workshop on Foundation Models for General Medical AI. Accepted on July 15},
   year={2024},
 }
+```

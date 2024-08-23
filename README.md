@@ -48,6 +48,24 @@ You don't need to run the 'dataset.py' file directly; the 'SAMDataset' function 
 
 **Note:** For detailed guidance on setting up your own dataset and configuring the prompts functions, please refer to the 'README.md' file located in the 'preprocessing' folder.
 
+**3. 'train.py':** 
+
+ **Purpose:**
+ 
+This file is used to execute the main training script and run the training process.
+
+**4. 're-train.py':** 
+
+ **Purpose:**
+
+This file allows you to continue training from a specific epoch by loading the previous model checkpoints.
+
+**4. 'inference.py':** 
+
+ **Purpose:**
+
+ This file is used to perform testing using the test set.
+ 
 **3. 'requirements.py':** 
 
  **Purpose:**

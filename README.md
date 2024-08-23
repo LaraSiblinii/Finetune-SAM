@@ -10,24 +10,24 @@ Our study explores prompt-guided strategies in SAM for medical image segmentatio
 
 **1. 'main.py' located indide '_ main _' folder:**
 
- **Purpose:**
-
-This is the main script where the SAM model is defined and the training process is executed. The 'SAMDataset' function, which is critical for loading and preprocessing the dataset, is included here.
- 
-**Key Points:**
-
-- Handles the setup for training and evaluation of the SAM model.
-- Includes the function 'SAMDataset', which you need to configure for your specific dataset.
-- Handles the prompts you wish to use: these prompts are provided as inputs to the model. If there are prompts you do not want to use, you should set them to `None`.
+   **Purpose:**
   
-```python
-  outputs = model(pixel_values=batch["pixel_values"].to(device),
-                  input_boxes=batch["input_boxes"].to(device),# Use this prompt
-                  input_points=None,# Other prompts set to None
-                  input_labels=None, # Other prompts set to None
-                  multimask_output=False)  # set to 'True' if you want multi-mask output
-``` 
-**Note:** 'input_points' and 'input_labels' prompts should be used together 
+  This is the main script where the SAM model is defined and the training process is executed. The 'SAMDataset' function, which is critical for loading and preprocessing the dataset, is included here.
+   
+  **Key Points:**
+  
+  - Handles the setup for training and evaluation of the SAM model.
+  - Includes the function 'SAMDataset', which you need to configure for your specific dataset.
+  - Handles the prompts you wish to use: these prompts are provided as inputs to the model. If there are prompts you do not want to use, you should set them to `None`.
+    
+  ```python
+    outputs = model(pixel_values=batch["pixel_values"].to(device),
+                    input_boxes=batch["input_boxes"].to(device),# Use this prompt
+                    input_points=None,# Other prompts set to None
+                    input_labels=None, # Other prompts set to None
+                    multimask_output=False)  # set to 'True' if you want multi-mask output
+  ``` 
+  **Note:** 'input_points' and 'input_labels' prompts should be used together 
 
 **2. 'dataset.py' located inside 'preprocessing' folder:** 
 

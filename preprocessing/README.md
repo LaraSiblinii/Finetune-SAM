@@ -70,10 +70,18 @@ c) 'get_region_centroids_boxes_points': used for generating several positive poi
 
 d) 'get_region_severalpositive_negative_points': used for generating several positive and negative points from ground truth masks.
 
-**Note:** to use a particular function 
+**Note:** To use specific functions with the 'SAMDataset', you need to specify them within the dataset class. Here’s an example of how to configure your prompts:
 
 ```python
-prompt1 = get_bounding_box(ground_truth_mask)
-_, prompt2, prompt3 = get_region_severalpositive_negative_points(ground_truth_mask)
- inputs = self.processor(image_rgb,input_boxes=[[prompt1]],input_points=[[prompt2]],input_labels=[[prompt3]],return_tensors="pt")
+prompt1 = get_bounding_box(ground_truth_mask) 
+_, prompt2, prompt3 = get_region_severalpositive_negative_points(ground_truth_mask) #choose which function you wish to use
+
+# Pass the selected prompts to the processor
+inputs = self.processor(
+    image_rgb,
+    input_boxes=[[prompt1]],      # Include the bounding box prompt
+    input_points=[[prompt2]],    # Include the points prompt
+    input_labels=[[prompt3]],    # Include the labels prompt
+    return_tensors="pt"          
+)
 ```

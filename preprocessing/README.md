@@ -50,10 +50,30 @@ ScaleIntensityRanged(
 **For Labels:**
 
 -'a_min': This parameter should be set to the minimum intensity value present in your labels.
+
 -'a_max': This parameter should be set to the maximum intensity value present in your labels.
+
 -'b_min': The minimum value to scale to, usually 0.0.
+
 -'b_max': The maximum value to scale to, often 1.0.
 
 **Important Note:** If your labels are already binarized (i.e., they only contain values 0 and 1), you should skip the ScaleIntensityRanged 
 transform for labels.
 
+**2. 'Prompting Functions'**
+
+a) 'get_bounding_box': used for generating box prompts from ground truth masks.
+
+b) 'get_region_centroids': used for generating single positive points from ground truth masks.
+
+c) 'get_region_centroids_boxes_points': used for generating several positive points with specificed 'Threshold' from ground truth masks. 
+
+d) 'get_region_severalpositive_negative_points': used for generating several positive and negative points from ground truth masks.
+
+**Note:** to use a particular function 
+
+```python
+prompt1 = get_bounding_box(ground_truth_mask)
+_, prompt2, prompt3 = get_region_severalpositive_negative_points(ground_truth_mask)
+ inputs = self.processor(image_rgb,input_boxes=[[prompt1]],input_points=[[prompt2]],input_labels=[[prompt3]],return_tensors="pt")
+```

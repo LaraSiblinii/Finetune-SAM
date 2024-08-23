@@ -8,7 +8,7 @@ Our study explores prompt-guided strategies in SAM for medical image segmentatio
 
 **Repository Structure**
 
-**1. 'main.py'**
+**1. 'main.py' indie '_ main _' folder**
 
  **Purpose:**
 
@@ -29,7 +29,7 @@ This is the main script where the SAM model is defined and the training process 
 ``` 
 **Note:** 'input_points' and 'input_labels' prompts should be used together 
 
-**1. 'dataset.py':** 
+**2. 'dataset.py' inside 'preprocessing' folder:** 
 
  **Purpose:**
 
@@ -47,3 +47,5 @@ You don't need to run the 'dataset.py' file directly; the 'SAMDataset' function 
 -  Handling of Prompts Functions.
 
 **Note:** For detailed guidance on setting up your own dataset and configuring the prompts functions, please refer to the **'README.md'** file located in the **'preprocessing'** folder.
+
+

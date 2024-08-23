@@ -6,7 +6,7 @@ Our study explores prompt-guided strategies in SAM for medical image segmentatio
 
 ![Figure 1/ SAM Setup](Figure1.png)
 
-**Repository Structure**
+<h2><u>Repository Structure</u></h2>
 
 **1. 'main.py' located indide '_ main _' folder:**
 
@@ -78,8 +78,7 @@ Ensure you install all the required packages using the following command:
 pip install -r requirements.txt
 ```
 
-
-**Quick Start:**
+<h2><u>Quick Start</u></h2>
 
 **Install**
 

@@ -24,5 +24,5 @@ This is the main script where the SAM model is defined and the training process 
                   input_points=None,# Other prompts set to None
                   input_labels=None, # Other prompts set to None
                   multimask_output=False)  # set to 'False' if you want one mask output
-\`\`\`
+\\\
 - Handles the setup for training and evaluation of the SAM model.

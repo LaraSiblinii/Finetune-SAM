@@ -14,5 +14,13 @@ This is the main script where the SAM model is defined and the training process 
  
 **Key Points:**
 
-- Handles the setup for training and evaluation of the SAM model. 
+- Handles the setup for training and evaluation of the SAM model.
 - Includes the function 'SAMDataset', which you need to configure for your specific dataset.
+- Handles the prompts you wish to use: these prompts are provided as inputs to the model. If there are prompts you do not want to use, you should set them to `None`.
+  
+```python
+outputs = model(pixel_values=batch["pixel_values"].to(device),
+                input_boxes=batch["input_boxes"].to(device),# Use this prompt
+                input_points=None,# Other prompts set to None
+                input_labels=None, # Other prompts set to None
+                multimask_output=False)  # set to 'False' if you want one mask output

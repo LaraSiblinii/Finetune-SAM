@@ -23,9 +23,9 @@ This is the main script where the SAM model is defined and the training process 
                   input_boxes=batch["input_boxes"].to(device),# Use this prompt
                   input_points=None,# Other prompts set to None
                   input_labels=None, # Other prompts set to None
-                  multimask_output=False)  # set to 'False' if you want one mask output
+                  multimask_output=False)  # set to 'True' if you want multi-mask output
 ``` 
-**Note:** 'input_points' and 'input_labels' should be used together 
+**Note:** 'input_points' and 'input_labels' prompts should be used together 
 
 **1. 'dataset.py':** 
 
@@ -43,3 +43,5 @@ You don't need to run the 'dataset.py' file directly; the 'SAMDataset' function 
      If your labels are already binarized (values of 0 and 1), you can skip this transformation for labels.
     
 -  Handling of Prompts Functions.
+
+**Note:** For detailed guidance on setting up your own dataset and configuring the prompts functions, please refer to the **'README.md'** file located in the **'preprocessing'** folder.

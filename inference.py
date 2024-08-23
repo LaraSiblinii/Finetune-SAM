@@ -7,12 +7,6 @@ from _main_.main import *
 import csv
 import nibabel as nib
 
-def crop_center(image, crop_size):
-    h, w = image.shape
-    start_x = w // 2 - (crop_size // 2)
-    start_y = h // 2 - (crop_size // 2)
-    return image[start_y:start_y+crop_size, start_x:start_x+crop_size]
-
 # For IRCAD, either for Patient9.json or Patient6.json
 def datafold_test_IRCAD(datalist, basedir, key="training"):
     with open(datalist) as f:
@@ -53,8 +47,8 @@ def datafold_test_PICAI(datalist, basedir, key="training"):
 if __name__ == "__main__":
     data_dir = "/home3/lsiblini/data/IRCAD"
     json_list = "/home3/lsiblini/data/IRCAD/Patient6.json"
-    output_dir= "/home3/lsiblini/output/Testing"
-    checkpoint_filepath= "/home3/lsiblini/output/model_checkpoints.pt"
+    output_dir= "/home3/lsiblini/output/Testing" #path where to save the results
+    checkpoint_filepath= "/home3/lsiblini/output/model_checkpoints.pt" #path to model checkpoints
     config = SamConfig.from_pretrained("facebook/sam-vit-base")
     model = SamModel(config)
     model.load_state_dict(torch.load(checkpoint_filepath)["state_dict"])
@@ -140,7 +134,7 @@ if __name__ == "__main__":
         print("Average precision Score:", avg_precision)
     
     
-        csv_file="/home3/lsiblini/output/Testing/metrics.csv"
+        csv_file="/home3/lsiblini/output/Testing/metrics.csv" #path where to save metrics
         with open(csv_file, "w", newline='') as file:
             writer = csv.writer(file)
             writer.writerow(["Sample", "Dice Score", "Jaccard Score", "precision score"])

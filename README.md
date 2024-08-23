@@ -90,7 +90,7 @@ pip install -q git+https://github.com/huggingface/transformers.git
 pip install -r requirements.txt
 ```
 
-- Step 2: Download the SAM weights from [SAM repository](https://github.com/facebookresearch/segment-anything#model-checkpoints)
+- Step 2: Download the SAM vit_b weights from [SAM repository](https://github.com/facebookresearch/segment-anything#model-checkpoints)
 
 **Train and Test**
 

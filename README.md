@@ -46,7 +46,7 @@ You don't need to run the 'dataset.py' file directly; the 'SAMDataset' function 
     
 -  Handling of Prompts Functions.
 
-**Note:** For detailed guidance on setting up your own dataset and configuring the prompts functions, please refer to the **'README.md'** file located in the **'preprocessing'** folder.
+**Note:** For detailed guidance on setting up your own dataset and configuring the prompts functions, please refer to the 'README.md' file located in the 'preprocessing' folder.
 
 **3. 'requirements.py':** 
 
@@ -74,3 +74,5 @@ pip install -r requirements.txt
 ```
 
 - Step 2: Dowload the SAM weights
+
+- Step 3: 

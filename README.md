@@ -66,7 +66,7 @@ This file allows you to continue training from a specific epoch by loading the p
 
  This file is used to perform testing using the test set.
  
-**3. 'requirements.py':** 
+**5. 'requirements.py':** 
 
  **Purpose:**
 

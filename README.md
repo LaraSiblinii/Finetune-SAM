@@ -25,4 +25,21 @@ This is the main script where the SAM model is defined and the training process 
                   input_labels=None, # Other prompts set to None
                   multimask_output=False)  # set to 'False' if you want one mask output
 ``` 
+**Note:** 'input_points' and 'input_labels' should be used together 
 
+**1. 'dataset.py':** 
+
+ **Purpose:**
+
+This file provides a template for setting up your dataset, including necessary transformations and preprocessing steps tailored to your data. 
+You don't need to run the 'dataset.py' file directly; the 'SAMDataset' function is invoked within the 'main.py' file during training.
+
+**Key Focus Areas:**
+
+- 'ScaleIntensityRanged' Transform:
+   - For images: Adjust the 'a_min' and 'a_max' parameters to match the intensity range of your dataset.
+     
+   - For labels: Set the 'a_min' and 'a_max' parameters according to the intensity range of your labels.
+     If your labels are already binarized (values of 0 and 1), you can skip this transformation for labels.
+    
+-  Handling of Prompts Functions.

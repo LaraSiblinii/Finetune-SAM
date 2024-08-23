@@ -103,10 +103,15 @@ pip install -r requirements.txt
 
 <h2><u>Acknowlegments</u></h2>
 The code presented in this repository builds upon and integrates concepts from the following resources:
+
 - [SAM](https://github.com/facebookresearch/segment-anything)
+
 - [finetune-SAM](https://github.com/mazurowski-lab/finetune-SAM?tab=readme-ov-file)
+  
 - [MedSAM](https://github.com/bowang-lab/MedSAM)
+  
 - [LoRA for SAM](https://github.com/JamesQFreeman/Sam_LoRA)
+  
 - [Medical SAM Adapter](https://github.com/MedicineToken/Medical-SAM-Adapter)
 
 <h2><u>Citation</u></h2>

@@ -85,8 +85,8 @@ pip install -r requirements.txt
 - Step 1:
 
 ```python
-pip install -q monai
 pip install -q git+https://github.com/huggingface/transformers.git
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
 pip install -r requirements.txt
 ```
 

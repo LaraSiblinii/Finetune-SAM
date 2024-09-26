@@ -4,4 +4,6 @@ scipy == 1.12.0
 tqdm == 4.66.2
 Pillow == 10.2.0
 matplotlib == 3.8.0
+Nibabel == 5.2.1
+omegaconf == 2.3.0
 git+https://github.com/huggingface/transformers.git

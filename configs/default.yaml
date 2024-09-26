@@ -1,0 +1,28 @@
+# General
+ pretrained_weights: facebook/sam-vit-base
+ nameRun: debug2
+ seed: 1234
+ saveImg_val: True
+
+  
+ root_dir: ./output/${nameRun}
+ filename: model_checkpoints.pt
+ train_output_path: ${root_dir}/train_epoch.txt
+ val_output_path: ${root_dir}/val_epoch.txt
+ dataset: IRCAD
+ json_name: traindebug.json
+ batch_size: 2
+ max_epochs: 3
+ Valbatch_size: 1
+
+ lr: 1e-5
+ data_dir: ./data/${dataset}
+ json_list: ${data_dir}/${json_name}
+ 
+ prompt: HybridA # PosNegPoint Boxes Box HybridA (Boxes,PosPoints) HybridB (Boxes,PosNegPoints) HybridC (Box,PosPoints) HybridD (Box,PosNegPoints) 
+ area_Thr: 2000 #threshold establish the number of poitns to take
+ 
+ 
+ wandb_act: False
+ entity: xamus86
+ project_name: Fine-Tunning_SAM

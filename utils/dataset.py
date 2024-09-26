@@ -28,9 +28,6 @@ class SAMDataset(Dataset):
 
             Orientationd(keys=['image', 'label'], axcodes='RA'),
 
-            # resample all training images to a fixed spacing
-            Spacingd(keys=['image', 'label'], pixdim=(1.5, 1.5), mode=("bilinear", "nearest")),
-
             # scale intensities to 0 and 255 to match the expected input intensity range
             ScaleIntensityRanged(keys=['image'], a_min=-150, a_max=250,
                          b_min=0.0, b_max=255.0, clip=True),

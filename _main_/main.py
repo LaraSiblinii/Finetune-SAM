@@ -10,22 +10,23 @@ from pathlib import Path
 from PIL import Image
 from tqdm import tqdm
 import matplotlib.pyplot as plt
-import SimpleITK as sitk
-from statistics import mean
+#matplotlib.use('Agg')
 from torch.optim import Adam
 import matplotlib.pyplot as plt
 from torch.nn.utils.rnn import pad_sequence
 from transformers import SamModel, SamConfig
-import matplotlib.patches as patches
+#import matplotlib.patches as patches
 from transformers import SamProcessor
 from torch.utils.data import Dataset, DataLoader
 from scipy.ndimage import label, find_objects
-from monai.metrics import DiceMetric
-from torch.nn.functional import threshold
+
 # Add the parent directory of _main_ to the Python path
 parent_dir = Path(__file__).resolve().parent.parent
 sys.path.append(str(parent_dir))
-from loss_functions.loss_functions import seg_loss
+from loss_function.loss_functions import seg_loss
+from monai.data import decollate_batch
+from utils.util import save_images_examples,save_checkpoint,PlotTrVal_curves
+
 
 from monai.transforms import (
     EnsureChannelFirstd,
@@ -55,13 +56,6 @@ class AverageMeter(object):
         self.count += n
         self.avg = np.where(self.count > 0, self.sum / self.count, self.sum)
 
-def save_checkpoint(model, epoch, filename, root_dir, best_loss=100):
-    state_dict = model.state_dict()
-    optimizer_state_dict = optimizer.state_dict()
-    save_dict = {"epoch": epoch, "best_loss": best_loss, "state_dict": state_dict, "optimizer_state_dict": optimizer_state_dict}
-    filename = os.path.join(root_dir, filename)
-    torch.save(save_dict, filename)
-    print("Saving checkpoint", filename)
 
 def datafold_read(datalist, basedir, key="training"):
     with open(datalist) as f:
@@ -116,6 +110,39 @@ def get_bounding_box(ground_truth_map):
         return bbox
     else:
         return [0, 0, 256, 256] 
+    
+
+def get_all_bounding_box(ground_truth_map):
+    '''
+    This function creates varying bounding box coordinates based on the segmentation contours as prompt for the SAM model
+    The padding is random int values between 5 and 20 pixels
+
+    Returns:
+    List of Bounding Box Coordinates: [xmin, ymin, xmax, ymax]
+    '''
+    labeled_mask, num_features = label(ground_truth_map)
+    bbox=[]
+
+    if len(np.unique(ground_truth_map)) > 1:
+
+        for regionID in range(num_features):
+            y_indices, x_indices = np.where(labeled_mask==regionID+1) 
+      
+            x_min, x_max = np.min(x_indices), np.max(x_indices) 
+
+            y_min, y_max = np.min(y_indices), np.max(y_indices)
+
+            H, W = ground_truth_map.shape
+            x_min = max(0, x_min - np.random.randint(5, 20))
+            x_max = min(W, x_max + np.random.randint(5, 20))
+            y_min = max(0, y_min - np.random.randint(5, 20))
+            y_max = min(H, y_max + np.random.randint(5, 20))
+
+            bbox.append([x_min, y_min, x_max, y_max])
+
+        return bbox
+    else:
+        return [0, 0, 256, 256]    
        
 def get_region_centroids(binary_mask):
     """
@@ -163,7 +190,7 @@ def get_region_centroids(binary_mask):
 
     return all_points, midpoints, labels
 
-def get_region_centroids_boxes_points(binary_mask):
+def get_region_centroids_boxes_points(binary_mask,size_threshold=0):
     """
     This function identifies distinct regions within a binary mask and calculates their centroids,
     the two top-left, and the two top-right points.
@@ -185,7 +212,6 @@ def get_region_centroids_boxes_points(binary_mask):
     midpoints = []
     labels = []
     new_mask = np.zeros_like(binary_mask)
-    size_threshold = 20
     
     for region in regions:
         if region is not None:
@@ -260,7 +286,7 @@ def get_region_centroids_boxes_points(binary_mask):
     
     return all_points, midpoints, labels
 
-def get_region_severalpositive_negative_points(binary_mask):
+def get_region_severalpositive_negative_points(binary_mask,size_threshold=20):
     """
     This function identifies distinct regions within a binary mask, calculates their centroids,
     the two top-left, and the two top-right points, and places points outside the regions but between the regions (background points).
@@ -283,7 +309,6 @@ def get_region_severalpositive_negative_points(binary_mask):
     labels = []
     boundary_points=[]
     new_mask = np.zeros_like(binary_mask)
-    size_threshold = 20
 
     for region in regions:
         if region is not None:
@@ -396,47 +421,51 @@ def get_region_severalpositive_negative_points(binary_mask):
 def pad_collate_fn(batch):
     
     pixel_values = torch.stack([item['pixel_values'] for item in batch]) 
-    input_boxes = torch.stack([item['input_boxes'] for item in batch])
+    input_boxes = [item['input_boxes'][np.newaxis,:] for item in batch]
     ground_truth_mask = torch.stack([item['ground_truth_mask'] for item in batch])
     
     input_points = [item['input_points'] for item in batch]
 
     input_labels = [item['input_labels'] for item in batch]
-    
+
+    padded_input_boxes = pad_sequence([boxes.squeeze(0) for boxes in input_boxes], batch_first=True, padding_value=0) 
     padded_input_points = pad_sequence([points.squeeze(0) for points in input_points], batch_first=True, padding_value=0) 
     padded_input_labels = pad_sequence([labels.squeeze(0) for labels in input_labels], batch_first=True, padding_value=-10)
     
+    padded_input_boxes = padded_input_boxes
     padded_input_points = padded_input_points.unsqueeze(1)
     padded_input_labels = padded_input_labels.unsqueeze(1)
-    
+
+
     return {
         'pixel_values': pixel_values,
-        'input_boxes': input_boxes,
+        'input_boxes': padded_input_boxes,
         'input_points': padded_input_points,
         'input_labels': padded_input_labels,
-        'ground_truth_mask': ground_truth_mask
-    }  
+        'ground_truth_mask': ground_truth_mask,
+    }
+
     
 class SAMDataset(Dataset):
-    def __init__(self, data_list, processor):
+    def __init__(self, data_list, processor,opt):
 
+        self.opt=opt
         self.data_list = data_list
         self.processor = processor
-        self.transforms = transforms = Compose([
+        self.transforms  = Compose([
 
-            LoadImaged(keys=['image', 'label']),
+            LoadImaged(keys=['image', 'label'],image_only=False),
 
             EnsureChannelFirstd(keys=['image', 'label']),
 
-            Orientationd(keys=['image', 'label'], axcodes='RA'),
-
-            Spacingd(keys=['image', 'label'], pixdim=(1.5, 1.5), mode=("bilinear", "nearest")),
+            #Orientationd(keys=['image', 'label'], axcodes='RA'),
+            #Spacingd(keys=['image', 'label'], pixdim=(1, 1), mode=("bilinear", "nearest")),
 
             ScaleIntensityRanged(keys=['image'], a_min=-150, a_max=250,
                          b_min=0.0, b_max=255.0, clip=True),
 
-            ScaleIntensityRanged(keys=['label'], a_min=0, a_max=255,
-                         b_min=0.0, b_max=1.0, clip=True),
+            #ScaleIntensityRanged(keys=['label'], a_min=0, a_max=255,
+            #             b_min=0.0, b_max=1.0, clip=True),
 
             SpatialPadd(keys=["image", "label"], spatial_size=(256,256))
             
@@ -457,15 +486,25 @@ class SAMDataset(Dataset):
         image = data_dict['image'].squeeze().astype(np.uint8)
         ground_truth_mask = data_dict['label'].squeeze() 
 
-        # convert the grayscale array to RGB (3 channels)
+        # convert the grayscale array to RGB (3 channels)/ check when there are 3 modalities as PICAI
         array_rgb = np.dstack((image, image, image)) # numpy_array (256,256,3)
 
         # convert to PIL image to match the expected input of processor
         image_rgb = Image.fromarray(array_rgb) #PIL.Image.Image
 
-        prompt1 = get_bounding_box(ground_truth_mask)#list (123,124,148,152)
-        
-        _, prompt2, prompt3 = get_region_severalpositive_negative_points(ground_truth_mask)
+        if self.opt.prompt in ["Boxes", "HybridA", "HybridB","PosPoints","PosNegPoints"]: #do one or multibox
+            prompt1 = get_all_bounding_box(ground_truth_mask)#get_bounding_box(ground_truth_mask)#list (123,124,148,152)
+        else: # Box "HybridC", "HybridD"
+            prompt1 = get_bounding_box(ground_truth_mask)#get_bounding_box(ground_truth_mask)#list (123,124,148,152)
+
+        if self.opt.prompt in ["PosPoints","HybridA", "HybridC",'Boxes','Box']:
+            _, prompt2, prompt3 = get_region_centroids_boxes_points(ground_truth_mask,self.opt.area_Thr)
+        elif self.opt.prompt in ["PosNegPoints", "HybridB", "HybridD"]:
+            _, prompt2, prompt3 = get_region_severalpositive_negative_points(ground_truth_mask,self.opt.area_Thr)
+
+        ##visualize prompts and images
+        #prompt2=np.array(prompt2)
+        #show_boxes_on_image(image_rgb, prompt1), plt.plot(prompt2[:,0],prompt2[:,1],'ro', markersize=5),plt.show()
 
         # prepare image and prompt for the model
         inputs = self.processor(image_rgb,input_boxes=[[prompt1]],input_points=[[prompt2]],input_labels=[[prompt3]],return_tensors="pt") 
@@ -475,32 +514,64 @@ class SAMDataset(Dataset):
 
         # add ground truth segmentation (ground truth image size is 256x256)
         inputs["ground_truth_mask"] = torch.from_numpy(ground_truth_mask.astype(np.int8))
+        inputs['label_meta_dict']= data_dict['label_meta_dict']
 
         return inputs 
 
-def train_epoch(model, train_dataloader, optimizer, epoch, max_epochs, loss, train_output_path):
+def train_epoch(model, train_dataloader, optimizer, epoch, max_epochs, loss, train_output_path,opt):
         model.train()
         start_time = time.time()
         run_loss = AverageMeter()
         with open(train_output_path, "a") as f:
             for i, batch in enumerate(tqdm(train_dataloader)):
-                batch= {key: value.to(device) for key, value in batch.items()}              
+                batch= {key: value.to(opt.device) if key != 'label_meta_dict' else value for key, value in batch.items()}
 
-                outputs = model(pixel_values=batch["pixel_values"].to(device),
-                            input_points= batch["input_points"].cuda(),
-                            input_boxes= None,
-                            input_labels=  batch["input_labels"].cuda(),
+                if opt.prompt=='PosPoints' or opt.prompt=='PosNegPoints':
+                    input_points= batch["input_points"].cuda()
+                    input_labels= batch["input_labels"].cuda()
+                    input_boxes = None
+                elif opt.prompt=='Box' or opt.prompt=='Box':
+                    input_points= None
+                    input_labels= None
+                    input_boxes = batch["input_boxes"].cuda()
+                    opt.combineMask=True
+                elif opt.prompt=='HybridA' or opt.prompt=='HybridB':
+                    input_points= torch.moveaxis(batch["input_points"],(1,2),(2,1)).cuda()
+                    input_labels= torch.moveaxis(batch["input_labels"],1,2).cuda()
+                    input_boxes = batch["input_boxes"].cuda()  
+                    opt.combineMask=True
+                else:# 'HybridC' or 'HybridD'
+                    input_points= batch["input_points"].cuda()
+                    input_labels= batch["input_labels"].cuda()
+                    input_boxes = batch["input_boxes"].cuda()     
+                                        
+
+                outputs = model(pixel_values=batch["pixel_values"].to(opt.device),
+                            input_points= input_points,
+                            input_boxes= input_boxes,
+                            input_labels=  input_labels,
                             multimask_output=False)
+                if opt.combineMask:
+                    predicted_masks,_ =torch.max(outputs.pred_masks.squeeze(2),dim=1,keepdim=True)
+                else:
+                    predicted_masks = outputs.pred_masks.squeeze(1)
 
-                predicted_masks = outputs.pred_masks.squeeze(1)
-                ground_truth_masks = batch["ground_truth_mask"].float().to(device)
+                ground_truth_masks = batch["ground_truth_mask"].float().to(opt.device)
                 loss = seg_loss(predicted_masks, ground_truth_masks.unsqueeze(1)) 
 
                 optimizer.zero_grad()
                 loss.backward()
 
                 optimizer.step()
-                run_loss.update(loss.item(), n=10)
+                run_loss.update(loss.item(), n=opt.batch_size)
+
+                ######compute dice training##########################################
+                labels_list = decollate_batch(ground_truth_masks[:,np.newaxis,:])
+                outputs_list = decollate_batch(predicted_masks)
+                output_convert = [opt.post_trans(val_pred_tensor) for val_pred_tensor in outputs_list]
+
+                opt.dice_Train(y_pred=output_convert, y=labels_list)  
+
                 print(
                     "Epoch {}/{} {}/{}".format(epoch, max_epochs, i, len(train_dataloader)),
                     "loss: {:.4f}".format(run_loss.avg),
@@ -509,14 +580,27 @@ def train_epoch(model, train_dataloader, optimizer, epoch, max_epochs, loss, tra
                 )
                 start_time = time.time()
 
-        return run_loss.avg
+            average_diceTraining = opt.dice_Train.aggregate()[0].item()
+            print(
+                "Epoch {}/{} {}/{}".format(epoch, max_epochs, i, len(train_dataloader)),
+                "dice: {:.4f}".format(average_diceTraining),
+                file=f
+                    )  
+
+        if  opt.wandb_logger:
+            opt.wandb_logger.log({"train/loss_epoch":run_loss.avg},step=epoch)
+            opt.wandb_logger.log({"train/Dice_epoch":average_diceTraining},step=epoch)
+
+        opt.dice_Train.reset()
+        return average_diceTraining,run_loss.avg
 
 def val_epoch(
         model,
         val_dataloader,
         epoch,
         max_epochs,
-        val_output_path
+        val_output_path,
+        opt
         ):
         model.eval()
         start_time = time.time()
@@ -524,18 +608,53 @@ def val_epoch(
         with torch.no_grad():
             with open(val_output_path, "a") as f:
                 for i, val_batch in enumerate(tqdm(val_dataloader)):
-                    val_batch={key: value.to(device) for key, value in val_batch.items()}  
+                    val_batch={key: value.to(opt.device) if key != 'label_meta_dict' else value for key, value in val_batch.items()}
 
-                    outputs = model(pixel_values=val_batch["pixel_values"].to(device),
-                                input_points= batch["input_points"].cuda(),
-                                input_boxes= None,
-                                input_labels= batch["input_labels"].cuda(),
+                    if opt.prompt=='PosPoints' or opt.prompt=='PosNegPoints':
+                        input_points= val_batch["input_points"].cuda()
+                        input_labels= val_batch["input_labels"].cuda()
+                        input_boxes = None
+                    elif opt.prompt=='Box' or opt.prompt=='Box':
+                        input_points= None
+                        input_labels= None
+                        input_boxes = val_batch["input_boxes"].cuda()
+                        opt.combineMask=True
+                    elif opt.prompt=='HybridA' or opt.prompt=='HybridB':
+                        input_points= torch.moveaxis(val_batch["input_points"],(1,2),(2,1)).cuda()
+                        input_labels= torch.moveaxis(val_batch["input_labels"],1,2).cuda()
+                        input_boxes = val_batch["input_boxes"].cuda()  
+                        opt.combineMask=True
+                    else:# 'HybridC' or 'HybridD'
+                        input_points= val_batch["input_points"].cuda()
+                        input_labels= val_batch["input_labels"].cuda()
+                        input_boxes = val_batch["input_boxes"].cuda()    
+
+
+                    outputs = model(pixel_values=val_batch["pixel_values"].to(opt.device),
+                                input_points= input_points,
+                                input_boxes= input_boxes,
+                                input_labels= input_labels,
                                 multimask_output=False)
                                 
-                    predicted_val_masks = outputs.pred_masks.squeeze(1)
-                    ground_truth_masks = val_batch["ground_truth_mask"].float().to(device)
+                    if opt.combineMask:
+                        predicted_val_masks,_ =torch.max(outputs.pred_masks.squeeze(2),dim=1,keepdim=True)
+                    else:
+                        predicted_val_masks = outputs.pred_masks.squeeze(1)
+
+
+                    ground_truth_masks = val_batch["ground_truth_mask"].float().to(opt.device)
                     val_loss = seg_loss(predicted_val_masks, ground_truth_masks.unsqueeze(1))
-                    run_loss.update(val_loss.item(), n=1)
+                    run_loss.update(val_loss.item(), n=opt.Valbatch_size)
+
+
+                    ######compute dice training##########################################
+                    labels_list = decollate_batch(ground_truth_masks[:,np.newaxis,:])
+                    outputs_list = decollate_batch(predicted_val_masks)
+                    output_convert = [opt.post_trans(val_pred_tensor) for val_pred_tensor in outputs_list]
+
+                    opt.dice_val(y_pred=output_convert, y=labels_list)  
+
+
                     print(
                         "Epoch {}/{} {}/{}".format(epoch, max_epochs, i, len(val_dataloader)),
                         "loss: {:.4f}".format(run_loss.avg),
@@ -543,8 +662,23 @@ def val_epoch(
                         file=f
                     )
                     start_time = time.time()
+
+
+                average_diceVal = opt.dice_val.aggregate()[0].item()
+                print(
+                "Epoch {}/{} {}/{}".format(epoch, max_epochs, i, len(val_dataloader)),
+                "dice: {:.4f}".format(average_diceVal),
+                file=f
+                    )  
+
+            if  opt.wandb_logger:
+                opt.wandb_logger.log({"val/loss_epoch":run_loss.avg},step=epoch)
+                opt.wandb_logger.log({"val/Dice_epoch":average_diceVal},step=epoch)
+
+        opt.dice_val.reset()
+
                 
-        return run_loss.avg
+        return average_diceVal,run_loss.avg
     
 def trainer(
         model, 
@@ -558,77 +692,85 @@ def trainer(
         val_output_path,
         filename=None,
         root_dir=None,
+        opt=None
 ):
         trains_epoch=[]
         train_losses_avg=[]
+        dices_avg_train=[]
+        dices_avg_val=[]
         val_losses_avg=[]
-        val_loss_min= 100
+        val_dice_min= 0
         for epoch in range(start_epoch, max_epochs):
             print(time.ctime(), "Epoch:", epoch)
             epoch_time = time.time()
             
-            train_loss = train_epoch(
+            train_dice,train_loss = train_epoch(
                 model, 
                 train_dataloader, 
                 optimizer, 
                 epoch, 
                 max_epochs,
                 loss,
-                train_output_path
-            )
+                train_output_path,
+                opt
+             )
             train_avg_loss= np.mean(train_loss)
             trains_epoch.append(int(epoch))
             train_losses_avg.append(train_avg_loss)
+            dices_avg_train.append(train_dice)
             
             print(
                 "Final training  {}/{}".format(epoch, max_epochs - 1),
                 "loss: {:.4f}".format(train_avg_loss),
+                "dice: {:.4f}".format(train_dice),
                 "time {:.2f}s".format(time.time() - epoch_time),
         )
 
-            val_loss = val_epoch(
+            val_dice,val_loss = val_epoch(
                 model,
                 val_dataloader,
                 epoch,
                 max_epochs,
-                val_output_path
+                val_output_path,opt
             )
 
             val_avg_loss = np.mean(val_loss)
             val_losses_avg.append(val_avg_loss)
-            
+            dices_avg_val.append(val_dice)
+
+                     
             print(
                 "Final validation stats {}/{}".format(epoch, max_epochs - 1),
-                ", loss_Avg:",
-                val_avg_loss,
-                ", time {:.2f}s".format(time.time() - epoch_time),
+                "loss_Avg: {:.4f}".format(val_avg_loss),
+                "dice: {:.4f}".format(val_dice),
+                "time {:.2f}s".format(time.time() - epoch_time),
             )
             
-            if val_avg_loss < val_loss_min:
-                print(f"Model Was Saved! Current Best val loss {val_avg_loss}")
-                val_loss_min = val_avg_loss
+            if val_dice_min < val_dice:
+                print(f"Model Was Saved! Current Best val dice {val_dice}")
+                val_dice_min = val_dice
                 save_checkpoint(
                     model,
+                    optimizer,
                     epoch,
                     filename,
                     root_dir,
-                    best_loss=val_loss_min,
+                    best_loss=val_avg_loss,
+                    best_dice=val_dice_min
                 )
             else:
                 print("Model Was Not Saved!")
 
-        print("Training Finished !, Best loss: ", val_loss_min)
+        print("Training Finished !, Best Dice: ", val_dice_min)
+
+        if opt.saveImg_val:
+            save_images_examples(val_dataloader,opt)
+
         return (
-            val_loss_min,
+            val_dice_min,
             val_losses_avg,
             train_losses_avg,
+            dices_avg_train,
+            dices_avg_val,
             trains_epoch
         )
-
-device = "cuda" if torch.cuda.is_available() else "cpu"
-model = SamModel.from_pretrained("facebook/sam-vit-base") 
-optimizer = Adam(model.mask_decoder.parameters(), lr=1e-5, weight_decay=0)
-processor = SamProcessor.from_pretrained("facebook/sam-vit-base")
-seg_loss = monai.losses.DiceCELoss(sigmoid=True, squared_pred=True, reduction='mean')
- 
-    

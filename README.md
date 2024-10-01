@@ -20,9 +20,7 @@ Our study explores prompt-guided strategies in SAM for medical image segmentatio
 
 Contains an example of a configuration file (`debug.yaml`) used for training and performing inference with different types of prompts. The prompts can be set using the argument *prompt*. The following prompts are currently available: Box, Boxes, PosNegPoints, PosPoints, HybridA (Boxes + PosPoints), HybridC (Box + PosPoints), and HybridD (Box, PosNegPoints). The number of positive and negative prompts will depend on the argument *area_Thr* (as smaller areas require more points). Currently, HybridA does not support more than one positive point per box.
 
-**2. `main.py` located inside '\_main'\_folder:**
-
-**Purpose:**
+**2. `main.py` located inside '\_main\_' folder:**
 
 This is the main script where the SAM model is defined and the training process is executed. The 'SAMDataset' function, which is critical for loading and preprocessing the dataset, is included here.
 
@@ -44,8 +42,6 @@ This is the main script where the SAM model is defined and the training process 
 
 **3. `dataset.py` located inside 'utils' folder:**
 
-**Purpose:**
-
 This file provides a template for setting up your dataset, including necessary transformations and preprocessing steps tailored to your data. You don't need to run the 'dataset.py' file directly; the 'SAMDataset' function is invoked within the 'main.py' file during training.
 
 **Key Focus Areas:**
@@ -58,19 +54,13 @@ This file provides a template for setting up your dataset, including necessary t
 
 **4. `train.py`:**
 
-**Purpose:**
-
 This file is used to execute the main training script and run the training process.
 
-**4. `inference.py`:**
-
-**Purpose:**
+**5. `inference.py`:**
 
 This file is used to perform testing using the test set.
 
-**5. `requirements.txt`:**
-
-**Purpose:**
+**6. `requirements.txt`:**
 
 Lists all the Python dependencies required to run this project.
 

@@ -530,7 +530,7 @@ def train_epoch(model, train_dataloader, optimizer, epoch, max_epochs, loss, tra
                     input_points= batch["input_points"].cuda()
                     input_labels= batch["input_labels"].cuda()
                     input_boxes = None
-                elif opt.prompt=='Box' or opt.prompt=='Box':
+                elif opt.prompt=='Box' or opt.prompt=='Boxes':
                     input_points= None
                     input_labels= None
                     input_boxes = batch["input_boxes"].cuda()
@@ -614,7 +614,7 @@ def val_epoch(
                         input_points= val_batch["input_points"].cuda()
                         input_labels= val_batch["input_labels"].cuda()
                         input_boxes = None
-                    elif opt.prompt=='Box' or opt.prompt=='Box':
+                    elif opt.prompt=='Box' or opt.prompt=='Boxes':
                         input_points= None
                         input_labels= None
                         input_boxes = val_batch["input_boxes"].cuda()

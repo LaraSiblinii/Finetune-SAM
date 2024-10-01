@@ -29,7 +29,7 @@ def save_images_examples(val_dataloader,opt):
                     input_points= val_batch["input_points"].cuda()
                     input_labels= val_batch["input_labels"].cuda()
                     input_boxes = None
-                elif opt.prompt=='Box' or opt.prompt=='Box':
+                elif opt.prompt=='Box' or opt.prompt=='Boxes':
                     input_points= None
                     input_labels= None
                     input_boxes = val_batch["input_boxes"].cuda()
@@ -68,10 +68,17 @@ def save_images_examples(val_dataloader,opt):
                 if input_points is not None  and input_boxes is not None:
                     if opt.combineMask:
                         points=input_points.squeeze(2).detach().cpu().numpy()[0]
+                        pointslabels=input_labels.squeeze(2).detach().cpu().numpy()[0]
                     else:
                         points=input_points.detach().cpu().numpy()[0][0]
+                        pointslabels=input_labels.detach().cpu().numpy()[0][0]
                     boxes=input_boxes.detach().cpu().numpy()[0]
-                    show_boxes_on_image(val_batch["pixel_values"].detach().cpu().numpy()[0][0], boxes), plt.plot(points[:,0],points[:,1],'ro', markersize=5)
+                    show_boxes_on_image(val_batch["pixel_values"].detach().cpu().numpy()[0][0], boxes)
+                    for i in range(len(points)):
+                        if pointslabels[i] == 1:
+                            plt.scatter(points[i, 0], points[i, 1], color='red', marker='o',s=8,label='Positive' if i == 0 else "")
+                        else:
+                            plt.scatter(points[i, 0], points[i, 1], color='blue',marker='x',s=15, label='Negative' if i == 0 else "")                    
                     plt.subplot(1,3,2)
                     plt.imshow(ground_truth_masks.detach().cpu().numpy()[0], cmap='copper')
                     plt.axis('off')
@@ -83,11 +90,19 @@ def save_images_examples(val_dataloader,opt):
                 elif input_points is not None:
                     if opt.combineMask:
                         points=input_points.squeeze(2).detach().cpu().numpy()[0]
+                        pointslabels=input_labels.squeeze(2).detach().cpu().numpy()[0]
                     else:
                         points=input_points.detach().cpu().numpy()[0][0]
+                        pointslabels=input_labels.detach().cpu().numpy()[0][0]
                     plt.figure(figsize=(10,10))
                     plt.subplot(1,3,1)
-                    plt.imshow(val_batch["pixel_values"].detach().cpu().numpy()[0][0], cmap='gray'), plt.plot(points[:,0],points[:,1],'ro', markersize=5)
+                    plt.imshow(val_batch["pixel_values"].detach().cpu().numpy()[0][0], cmap='gray')
+                    # Plot points with different colors based on the label
+                    for i in range(len(points)):
+                        if pointslabels[i] == 1:
+                            plt.scatter(points[i, 0], points[i, 1], color='red', marker='o',s=8,label='Positive' if i == 0 else "")
+                        else:
+                            plt.scatter(points[i, 0], points[i, 1], color='blue',marker='x',s=15, label='Negative' if i == 0 else "")
                     plt.axis('off')                     
                     plt.subplot(1,3,2)
                     plt.imshow(ground_truth_masks.detach().cpu().numpy()[0], cmap='copper')

@@ -33,8 +33,7 @@ def DataList_test(datalist,):
 
 def RunInference(opt):
     checkpoint_filepath= os.path.join(opt.root_dir,opt.filename)
-    config = SamConfig.from_pretrained(opt.pretrained_weights)
-    model = SamModel(config)
+    model = SamModel.from_pretrained(opt.pretrained_weights)
     if not opt.zeroshot:
         model.load_state_dict(torch.load(checkpoint_filepath)["state_dict"])
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -60,7 +59,7 @@ def RunInference(opt):
                     input_points= val_batch["input_points"].cuda()
                     input_labels= val_batch["input_labels"].cuda()
                     input_boxes = None
-                elif opt.prompt=='Box' or opt.prompt=='Box':
+                elif opt.prompt=='Box' or opt.prompt=='Boxes':
                     input_points= None
                     input_labels= None
                     input_boxes = val_batch["input_boxes"].cuda()

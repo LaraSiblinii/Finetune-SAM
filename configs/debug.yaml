@@ -35,3 +35,4 @@
  outTest_dir: ${root_dir}/Test_results/${Testjson_name}
  GTLabels_dir: ${data_dir}/database_labels_nii/Original
  zeroshot: False
+ 

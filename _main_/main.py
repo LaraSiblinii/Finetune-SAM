@@ -494,24 +494,31 @@ class SAMDataset(Dataset):
 
         if self.opt.prompt in ["Boxes", "HybridA", "HybridB","PosPoints","PosNegPoints"]: #do one or multibox
             prompt1 = get_all_bounding_box(ground_truth_mask)#get_bounding_box(ground_truth_mask)#list (123,124,148,152)
-        else: # Box "HybridC", "HybridD"
+        elif self.opt.prompt in ["Box" "HybridC", "HybridD"]:
             prompt1 = get_bounding_box(ground_truth_mask)#get_bounding_box(ground_truth_mask)#list (123,124,148,152)
+        else: # no prompts
+            prompt1=None
+
 
         if self.opt.prompt in ["PosPoints","HybridA", "HybridC",'Boxes','Box']:
             _, prompt2, prompt3 = get_region_centroids_boxes_points(ground_truth_mask,self.opt.area_Thr)
         elif self.opt.prompt in ["PosNegPoints", "HybridB", "HybridD"]:
             _, prompt2, prompt3 = get_region_severalpositive_negative_points(ground_truth_mask,self.opt.area_Thr)
+        else: # no prompt
+            prompt2,prompt3=None, None
 
         ##visualize prompts and images
         #prompt2=np.array(prompt2)
         #show_boxes_on_image(image_rgb, prompt1), plt.plot(prompt2[:,0],prompt2[:,1],'ro', markersize=5),plt.show()
 
         # prepare image and prompt for the model
-        inputs = self.processor(image_rgb,input_boxes=[[prompt1]],input_points=[[prompt2]],input_labels=[[prompt3]],return_tensors="pt") 
-
-        # remove batch dimension which the processor adds by default
-        inputs = {k: v.squeeze(0) for k, v in inputs.items()}
-
+        if self.opt.prompt !='noPrompts':
+            inputs = self.processor(image_rgb,input_boxes=[[prompt1]],input_points=[[prompt2]],input_labels=[[prompt3]],return_tensors="pt")
+            # remove batch dimension which the processor adds by default
+            inputs = {k: v.squeeze(0) for k, v in inputs.items()} 
+        else:
+            inputs = self.processor(image_rgb,input_boxes=prompt1,input_points=prompt2,input_labels=prompt3,return_tensors="pt")
+            
         # add ground truth segmentation (ground truth image size is 256x256)
         inputs["ground_truth_mask"] = torch.from_numpy(ground_truth_mask.astype(np.int8))
         inputs['label_meta_dict']= data_dict['label_meta_dict']

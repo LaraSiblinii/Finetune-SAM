@@ -83,9 +83,13 @@ if __name__ == "__main__":
 
    # Freeze the encoder weights for finetuning (only update gradients for mask decoder)
     for name, param in model.named_parameters():
-        if name.startswith("prompt_encoder") or name.startswith("vision_encoder"):
-            #print(name)
-            param.requires_grad_(False)
+        if opt.prompt != 'noPrompts':
+            if name.startswith("prompt_encoder") or name.startswith("vision_encoder"): # finetune only decoder
+                param.requires_grad_(False)
+        else:
+            if name.startswith("vision_encoder"): # finetune prompt and decoder
+                param.requires_grad_(False)
+
     opt.device = "cuda" if torch.cuda.is_available() else "cpu"
     model.to(opt.device)
     print(opt.device)

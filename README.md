@@ -123,10 +123,14 @@ The code presented in this repository builds upon and integrates concepts from t
 Please cite our paper if you use our code or reference our work:
 
 ``` python
-@inproceedings{Siblini2024SAM,
-  title={Optimal Prompting in SAM for Few-Shot and Weakly Supervised Medical Image Segmentation},
-  author={Siblini, Lara and Andrade-Miranda, Gustavo and Taguelmimt, Kamilia and Visvkis, Dimitris and Bert, Julien},
-  booktitle={MICCAI 2024 2nd International Workshop on Foundation Models for General Medical AI. Accepted on July 15},
-  year={2024},
+@article{Lsiblini2024,
+  author    = {{Siblini, Lara and Andrade-Miranda, Gustavo and Taguelmimt, Kamilia and Visvkis, Dimitris and Bert, Julien},
+  title     = {Optimal Prompting in SAM for Few-Shot and Weakly Supervised Medical Image Segmentation},
+  journal = {Proceedings of the 2nd International Workshop on Foundation Models for General Medical AI at MICCAI 2024},
+  year      = {2024},
+  doi       = {10.1007/978-3-031-73471-7_11},
+  url       = {https://link.springer.com/chapter/10.1007/978-3-031-73471-7_11},
+  publisher = {Springer},
 }
+
 ```

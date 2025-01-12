@@ -124,7 +124,7 @@ Please cite our paper if you use our code or reference our work:
 
 ``` python
 @article{Lsiblini2024,
-  author    = {{Siblini, Lara and Andrade-Miranda, Gustavo and Taguelmimt, Kamilia and Visvkis, Dimitris and Bert, Julien},
+  author    = {Siblini, Lara and Andrade-Miranda, Gustavo and Taguelmimt, Kamilia and Visvkis, Dimitris and Bert, Julien},
   title     = {Optimal Prompting in SAM for Few-Shot and Weakly Supervised Medical Image Segmentation},
   journal = {Proceedings of the 2nd International Workshop on Foundation Models for General Medical AI at MICCAI 2024},
   year      = {2024},
